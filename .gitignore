@@ -34,10 +34,3 @@ phpunit.phar
 
 # docker
 docker-compose.override.yml
-
-# sql files
-/*.sql
-/*.sql.gz
-
-# tar files
-*.tar.gz

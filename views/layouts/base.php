@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-2">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 text-white text-decoration-none">
-                    <div class="p-3 bg-primary rounded float-start"> LOGO </div>
+                    <img src="https://via.placeholder.com/45/09f/fff.png" />
                 </a>
             </div>
             <div class="col-md-8">
