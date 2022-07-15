@@ -11,7 +11,7 @@ class Article
     private string $slug;
     private string $title;
     private ?string $content;
-    private ?User $user;
+    private ?User $user = null;
 
     public function __construct(array $data)
     {

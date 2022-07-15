@@ -11,12 +11,11 @@ class ArticleController extends Controller
 {
     protected const PER_PAGE = 3;
 
-    public function index(Request $request)
+    private ArticleRepository $repo;
+    private ShortTextMaker $textPreparationService;
+
+    public function __construct()
     {
-        $page = $request->query->get('page', 1);
-
-        $title = 'Articles';
-
         //@todo use config/env to configure instances
         $dbConfig = [
             'hostname' => 'db',
@@ -26,18 +25,27 @@ class ArticleController extends Controller
         ];
 
         //@todo use DI
-        $textPreparationService = new ShortTextMaker();
+        $this->textPreparationService = new ShortTextMaker();
         $db = new Database($dbConfig);
-        $repo = new ArticleRepository($db);
-        $articles = $textPreparationService->makeAttributesShorter(
-            $repo->fetchAll(self::PER_PAGE, ($page-1) * self::PER_PAGE),
+        $this->repo = new ArticleRepository($db);
+
+        parent::__construct();
+    }
+
+    public function index(Request $request)
+    {
+        $page = $request->query->get('page', 1);
+
+        $title = 'Articles';
+
+        $articles = $this->textPreparationService->makeAttributesShorter(
+            $this->repo->fetchAll(self::PER_PAGE, ($page-1) * self::PER_PAGE),
             'content',
-        2
+            2
         );
 
-
         //@todo use Paginator class
-        $pages = (int)($repo->totalCount() / self::PER_PAGE);
+        $pages = (int)($this->repo->totalCount() / self::PER_PAGE);
 
         return $this->render('articles', [
             'title' => $title,
@@ -47,5 +55,15 @@ class ArticleController extends Controller
             'toPage' => ($end = $page + 10) > $pages ? $pages : $end,
             'page' => $page,
         ]);
+    }
+
+    public function show(Request $request)
+    {
+
+        $id = (int)(substr($request->getPathInfo(), strrpos($request->getPathInfo(), '/') + 1));
+
+        $article = $this->repo->findById($id);
+
+        return $this->render('article', ['article' => $article]);
     }
 }
