@@ -13,20 +13,23 @@
 <body class="d-flex flex-column h-100">
 
 <main class="flex-shrink-0">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header class="container py-3 mb-4 border-bottom">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 text-white text-decoration-none">
                     <div class="p-3 bg-primary rounded float-start"> LOGO </div>
                 </a>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="/" class="nav-link">Welcome</a></li>
+                    <li class="nav-item"><a href="/articles" class="nav-link">Articles</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 pull-right">
+                <ul class="nav">
+                    <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
                 </ul>
             </div>
         </div>

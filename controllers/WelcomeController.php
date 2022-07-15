@@ -2,25 +2,15 @@
 
 namespace App\Controllers;
 
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
-class WelcomeController
+class WelcomeController extends Controller
 {
-    public function index($request)
+    public function index(Request $request)
     {
-        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../views/');
-        $twig = new \Twig\Environment($loader,
-//            [
-//            'cache' => __DIR__ . '/../cache/',
-//        ]
-        );
-
         $title = 'Welcome';
         $content = 'Hello';
 
-
-        $template = $twig->load('/welcome.php');
-
-        return new Response($template->render(['title' => $title, 'body' => $content]));
+        return $this->render('welcome', ['title' => $title, 'body' => $content]);
     }
 }

@@ -13,7 +13,6 @@ $container = new DI\Container();
 
 $builder = new DI\ContainerBuilder();
 $builder->useAutowiring(true);
-//$builder->...
 $container = $builder->build();
 
 
@@ -27,13 +26,13 @@ $context = new RequestContext();
 $context->fromRequest($request);
 $matcher = new UrlMatcher($routes, $context);
 
-try {
+//try {
     $request->attributes->add($matcher->match($request->getPathInfo()));
     $response = call_user_func($request->attributes->get('_controller'), $request);
-} catch (ResourceNotFoundException $exception) {
-    $response = new Response('Not Found', 404);
-} catch (Exception $exception) {
-    $response = new Response('An error occurred', 500);
-}
+//} catch (ResourceNotFoundException $exception) {
+//    $response = new Response('Not Found', 404);
+//} catch (Exception $exception) {
+//    $response = new Response('An error occurred', 500);
+//}
 
 $response->send();
