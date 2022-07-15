@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Database;
 use App\Repositories\ArticleRepository;
+use App\Services\ShortTextMaker;
 use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends Controller
@@ -16,6 +17,7 @@ class ArticleController extends Controller
 
         $title = 'Articles';
 
+        //@todo use config/env to configure instances
         $dbConfig = [
             'hostname' => 'db',
             'database' => 'blog',
@@ -23,9 +25,15 @@ class ArticleController extends Controller
             'password' => 'pass',
         ];
 
+        //@todo use DI
+        $textPreparationService = new ShortTextMaker();
         $db = new Database($dbConfig);
         $repo = new ArticleRepository($db);
-        $articles = $repo->fetchAll(self::PER_PAGE, ($page-1) * self::PER_PAGE);
+        $articles = $textPreparationService->makeAttributesShorter(
+            $repo->fetchAll(self::PER_PAGE, ($page-1) * self::PER_PAGE),
+            'content',
+        2
+        );
 
 
         //@todo use Paginator class
