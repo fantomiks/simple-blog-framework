@@ -7,37 +7,71 @@
 
 <div class="container">
 {% for article in articles %}
-    <div class="col-md-12">
-        <div class="row pt-2">
-            <span class="date">{{ article.createdAt }}</span> - <span class="title">{{ article.title }}</span>
-        </div>
-        <div class="row p-2">
-            <div class="col-md-8">{{ article.content|e }}</div>
-            <div class="col-md-4">IMG</div>
-        </div>
-        <div class="row pb-2">
-            <div class="col-md-6">{{ article.user.name }}</div>
-            <div class="col-md-6">{{ article.commentsCount }}</div>
-        </div>
-    </div>
-{% endfor %}
+
+
+
+            <div class="card-body pb-0">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="media mb-4 mt-0">
+                            <div class="media-body  pr-4">
+                                <h6 class="media-title">
+                                    <a href="/articles/{{ article.id }}" data-abc="true">{{ article.title }}</a>
+                                    <div class="meta">
+                                        <div class="post-author">
+                                            By <a href="#">{{ article.user.name }}</a> /
+                                        </div>
+                                        <div class="post-date">
+                                            <i class="fa fa-clock-o"></i>{{ article.createdAt|date("l jS F Y")}} /
+                                        </div>
+                                        <div class="comments">
+                                            <i class="fa fa-solid fa-comment"></i> {{ article.commentsCount }}
+                                        </div>
+                                    </div>
+                                </h6>
+
+                                <div class="mt-4">
+                                {{ article.content|e }}
+                                </div>
+
+                                <div class="row mb-2 mt-4">
+                                    <div class="col-8">
+                                        <span class="text-muted">Author: {{ article.user.name }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="list-inline-item">Comments: {{ article.commentsCount }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex-column flex-md-row">
+                                <div class="card-img-actions">
+                                    <img src="{{ article.imageUrl }}" class="img-fluid img-preview rounded" alt="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
 
     <nav class="mt-4">
         <ul class="pagination">
-            {% if page > 10 %}
+            {% if paginator.needShowPrevButton() %}
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+                <a class="page-link" href="/articles?page={{ paginator.getPrevPage() }}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
             {% endif %}
-            {% for i in fromPage..toPage %}
-            <li class="page-item{% if page == i %} active{% endif %}"><a class="page-link" href="/articles?page={{i}}">{{ i }}</a></li>
+            {% for i in paginator.startPage()..paginator.endPage() %}
+            <li class="page-item{% if paginator.getCurrentPage() == i %} active{% endif %}"><a class="page-link" href="/articles?page={{ i }}">{{ i }}</a></li>
             {% endfor %}
-            {% if maxPage > 10 %}
+            {% if paginator.needShowNextButton() %}
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="/articles?page={{ paginator.getNextPage() }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>
