@@ -1,0 +1,28 @@
+{
+    "name": "fantomiks/simple-framework-for-blog",
+    "description": "Yet one framework for blog (test assignment)",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Paskhin"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php-di/php-di": "dev-master",
+        "symfony/http-foundation": "6.2.x-dev",
+        "symfony/routing": "6.2.x-dev",
+        "twig/twig": "3.x-dev",
+        "symfony/serializer": "6.2.x-dev",
+        "symfony/property-access": "6.2.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "6.2.x-dev"
+    }
+}

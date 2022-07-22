@@ -1,0 +1,20 @@
+# phpstorm project files
+.idea
+
+# windows thumbnail cache
+Thumbs.db
+
+# Mac DS_Store Files
+.DS_Store
+
+# composer vendor dir
+/vendor
+
+# local phpunit config
+/phpunit.xml
+
+#
+/.env
+
+# docker
+docker-compose.override.yml

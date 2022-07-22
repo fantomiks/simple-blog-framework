@@ -1,0 +1,7 @@
+.meta > div {
+    display: inline;
+    text-transform: uppercase;
+    color: #aaa;
+    font-size: 11px;
+}
+
