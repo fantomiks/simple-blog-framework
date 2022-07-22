@@ -1,26 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Model;
 
 class User
 {
-    use Timestampable;
-
     private int $id;
     private string $name;
     private string $email;
-
-    public function __construct(array $data)
-    {
-        foreach ($data as $attribute => $value) {
-            if (in_array($attribute, ['created_at', 'updated_at', 'deleted_at'])) {
-                $value = $value ? strtotime($value) : null;
-            }
-            if (property_exists(self::class, $attribute)) {
-                $this->{$attribute} = $value;
-            }
-        }
-    }
+    private \DateTime $created_at;
+    private \DateTime $updated_at;
 
     /**
      * @return int
@@ -68,5 +56,37 @@ class User
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param \DateTime $created_at
+     */
+    public function setCreatedAt(\DateTime $created_at): void
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * @param \DateTime $updated_at
+     */
+    public function setUpdatedAt(\DateTime $updated_at): void
+    {
+        $this->updated_at = $updated_at;
     }
 }
